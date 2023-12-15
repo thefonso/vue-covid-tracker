@@ -2,7 +2,7 @@
 import DateSelect from '../components/DateSelect.vue'
 import DataBoxes from '../components/DataBoxes.vue'
 import CountrySelect from '../components/CountrySelect.vue'
-import { toValue } from 'vue'
+
 
 export default {
   name: 'HomeView',
@@ -48,26 +48,15 @@ export default {
       //pull out dates list, based on new country
       this.dataDates = this.data[this.country].map(({date})=> date)
       console.log('NEW country DATES', this.dataDates)
-      //TODO: Update new stats based on new country AND current date
-      //this.stats = //find or filter out value
+      //Update new stats based on new country AND current date
       console.log("SELECTED DATE", this.currentDateSelected)
-      this.stats = this.data[this.country].find((item)=> {
-        console.log("ITEM: ", item)
-        if(item.date === this.currentDateSelected){
-          return item
-        }
-      })
-      console.log("WHAT IS IT?:", this.stats)
-      // call below???
-      //this.getDateData()
-      //console.log("NEW STATS", this.stats)
+      this.stats = this.data[this.country].find((item)=> item.date === this.currentDateSelected)
+      console.log("WHAT STATS?:", this.stats)
     },
     getDateData(statsDate,selected) {
       //find object with matching date
-    
       let myObject = this.data[this.country].find((item)=>{
         if(item.date === statsDate){
-          console.log("FOUND MATCH:",item)
           return item
         }
       })
@@ -75,9 +64,6 @@ export default {
       console.log("Specific country date info:", this.stats)
 
       this.currentDateSelected = selected
-
-      let test = this.data[this.country].find((item)=> item === statsDate)
-      console.log("WHAT IS IT?:", test)
     },
  
   },
